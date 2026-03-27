@@ -20,11 +20,17 @@ interface NavItem {
 interface Branding {
   logoUrl: string;
   logoAlt: string;
+  logoSquareUrl?: string;
+  logoRectUrl?: string;
+  logoText?: string;
+  logoIconUrl?: string;
   primaryColor: string;
   secondaryColor: string;
   accentColor: string;
   backgroundColor: string;
   textColor: string;
+  headingFont?: string;
+  bodyFont?: string;
   navTemplate: string;
   navPosition: string;
   navBackground: string;
@@ -56,12 +62,26 @@ export function SiteNavigation({ items, branding }: SiteNavigationProps) {
   const linkItems = topItems.filter(i => !i.isButton);
   const buttonItems = topItems.filter(i => i.isButton);
 
-  const gold = '#c9a96e';
+  const gold = branding.accentColor || '#c9a96e';
   const cream = 'rgba(245,230,211,0.7)';
   const dark = '#0d0d0d';
 
-  const logoEl = branding.logoUrl ? (
-    <Image src={branding.logoUrl} alt={branding.logoAlt || 'Logo'} width={36} height={36} style={{ opacity: 0.8 }} />
+  // Logo: prefer rectangle for nav, fall back to icon+text, then square, then legacy, then text
+  const navLogoUrl = branding.logoRectUrl || branding.logoUrl || branding.logoSquareUrl || '';
+  const logoIconSrc = branding.logoIconUrl || '';
+  const logoTextVal = branding.logoText || branding.logoAlt || '';
+
+  const logoEl = navLogoUrl ? (
+    <Image src={navLogoUrl} alt={branding.logoAlt || 'Logo'} width={120} height={36} style={{ opacity: 0.9, objectFit: 'contain', height: '36px', width: 'auto' }} />
+  ) : logoIconSrc ? (
+    <div className="flex items-center gap-2">
+      <Image src={logoIconSrc} alt="" width={32} height={32} style={{ opacity: 0.9 }} />
+      {logoTextVal && (
+        <span style={{ fontFamily: branding.headingFont ? `"${branding.headingFont}", Georgia, serif` : '"Playfair Display", Georgia, serif', fontSize: '1.25rem', letterSpacing: '0.1em', color: gold, textTransform: 'uppercase' }}>
+          {logoTextVal}
+        </span>
+      )}
+    </div>
   ) : null;
 
   const renderMegaDropdown = (item: NavItem) => {
@@ -191,17 +211,24 @@ export function SiteNavigation({ items, branding }: SiteNavigationProps) {
         {/* Logo */}
         <a href="#" className="flex items-center gap-3">
           {logoEl}
-          <span
-            style={{
-              fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: '1.25rem',
-              letterSpacing: '0.1em',
-              color: gold,
-              textTransform: 'uppercase',
-            }}
-          >
-            {branding.logoAlt || 'Palizzi'}
-          </span>
+          {!navLogoUrl && !logoIconSrc && logoTextVal && (
+            <span
+              style={{
+                fontFamily: branding.headingFont ? `"${branding.headingFont}", Georgia, serif` : '"Playfair Display", Georgia, serif',
+                fontSize: '1.25rem',
+                letterSpacing: '0.1em',
+                color: gold,
+                textTransform: 'uppercase',
+              }}
+            >
+              {logoTextVal}
+            </span>
+          )}
+          {!navLogoUrl && !logoIconSrc && !logoTextVal && (
+            <span style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1.25rem', letterSpacing: '0.1em', color: gold, textTransform: 'uppercase' }}>
+              {branding.logoAlt || 'Palizzi'}
+            </span>
+          )}
         </a>
 
         {/* Desktop nav links */}

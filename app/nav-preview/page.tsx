@@ -21,11 +21,17 @@ interface NavItem {
 interface Branding {
   logoUrl: string;
   logoAlt: string;
+  logoSquareUrl?: string;
+  logoRectUrl?: string;
+  logoText?: string;
+  logoIconUrl?: string;
   primaryColor: string;
   secondaryColor: string;
   accentColor: string;
   backgroundColor: string;
   textColor: string;
+  headingFont?: string;
+  bodyFont?: string;
   navTemplate: string;
   navPosition: string;
   navBackground: string;
