@@ -9,6 +9,7 @@ import { PalizziMembership } from '@/components/custom/PalizziMembership';
 import { PalizziFooter } from '@/components/custom/PalizziFooter';
 
 export const customBlocks: CustomBlockDefinition[] = [
+  // ── Navigation ──
   {
     manifest: {
       type: 'palizzi-nav',
@@ -17,11 +18,18 @@ export const customBlocks: CustomBlockDefinition[] = [
       category: 'Palizzi',
       description: 'Sticky navigation bar with gold accents and mobile hamburger menu',
       inputs: [
-        { name: 'logoUrl', label: 'Logo URL', type: 'image', defaultValue: '/images/nav-header.png' },
+        { name: 'logoUrl', label: 'Logo', type: 'image', defaultValue: '' },
         { name: 'brandName', label: 'Brand Name', type: 'string', defaultValue: 'Palizzi' },
+        {
+          name: 'links', label: 'Navigation Links', type: 'list',
+          listItemSchema: [
+            { name: 'label', label: 'Label', type: 'string' },
+            { name: 'href', label: 'URL / Anchor', type: 'string' },
+          ],
+        },
       ],
       defaultProps: {
-        logoUrl: '/images/nav-header.png',
+        logoUrl: '',
         brandName: 'Palizzi',
         links: [
           { label: 'History', href: '#history' },
@@ -33,6 +41,8 @@ export const customBlocks: CustomBlockDefinition[] = [
     },
     component: PalizziNav,
   },
+
+  // ── Hero ──
   {
     manifest: {
       type: 'palizzi-hero',
@@ -41,24 +51,26 @@ export const customBlocks: CustomBlockDefinition[] = [
       category: 'Palizzi',
       description: 'Full-screen hero with neon sign, crest, and scroll indicator',
       inputs: [
-        { name: 'address', label: 'Address', type: 'string', defaultValue: '1408 South 12th Street \u00b7 Philadelphia' },
-        { name: 'crestUrl', label: 'Crest Image', type: 'image', defaultValue: '/images/nav-header.png' },
-        { name: 'neonUrl', label: 'Neon Sign Image', type: 'image', defaultValue: '/images/neon-red.png' },
-        { name: 'tagline', label: 'Tagline', type: 'string', defaultValue: "if the neon is on, we\u2019re open" },
-        { name: 'established', label: 'Established', type: 'string', defaultValue: 'Est. 1918' },
-        { name: 'scrollTarget', label: 'Scroll Target', type: 'string', defaultValue: '#welcome' },
+        { name: 'address', label: 'Address Line', type: 'string', defaultValue: '' },
+        { name: 'crestUrl', label: 'Crest Image', type: 'image', defaultValue: '' },
+        { name: 'neonUrl', label: 'Neon Sign Image', type: 'image', defaultValue: '' },
+        { name: 'tagline', label: 'Tagline', type: 'string', defaultValue: '' },
+        { name: 'established', label: 'Established Text', type: 'string', defaultValue: '' },
+        { name: 'scrollTarget', label: 'Scroll Target Anchor', type: 'string', defaultValue: '#welcome' },
       ],
       defaultProps: {
-        address: '1408 South 12th Street \u00b7 Philadelphia',
-        crestUrl: '/images/nav-header.png',
-        neonUrl: '/images/neon-red.png',
-        tagline: "if the neon is on, we\u2019re open",
-        established: 'Est. 1918',
+        address: '',
+        crestUrl: '',
+        neonUrl: '',
+        tagline: '',
+        established: '',
         scrollTarget: '#welcome',
       },
     },
     component: PalizziHero,
   },
+
+  // ── Welcome ──
   {
     manifest: {
       type: 'palizzi-welcome',
@@ -70,23 +82,34 @@ export const customBlocks: CustomBlockDefinition[] = [
         { name: 'overline', label: 'Overline', type: 'string', defaultValue: 'Benvenuti' },
         { name: 'title', label: 'Title', type: 'string', defaultValue: 'Welcome to' },
         { name: 'titleAccent', label: 'Title Accent', type: 'string', defaultValue: 'Palizzi Social Club' },
-        { name: 'bookImage', label: 'Book Image', type: 'image', defaultValue: '/images/dinner-at-the-club.jpg' },
-        { name: 'bookTitle', label: 'Book Title', type: 'string', defaultValue: 'Dinner at the Club' },
+        {
+          name: 'paragraphs', label: 'Paragraphs', type: 'list',
+          listItemSchema: [
+            { name: 'text', label: 'Paragraph Text', type: 'string' },
+          ],
+        },
+        { name: 'bookImage', label: 'Book Cover Image', type: 'image', defaultValue: '' },
+        { name: 'bookLabel', label: 'Book Badge Label', type: 'string', defaultValue: 'Now Available' },
+        { name: 'bookTitle', label: 'Book Title', type: 'string', defaultValue: '' },
+        { name: 'bookSubtitle', label: 'Book Subtitle', type: 'string', defaultValue: '' },
+        { name: 'bookAuthors', label: 'Book Authors', type: 'string', defaultValue: '' },
       ],
       defaultProps: {
         overline: 'Benvenuti',
         title: 'Welcome to',
         titleAccent: 'Palizzi Social Club',
         paragraphs: [],
-        bookImage: '/images/dinner-at-the-club.jpg',
-        bookTitle: 'Dinner at the Club',
+        bookImage: '',
+        bookLabel: 'Now Available',
+        bookTitle: '',
         bookSubtitle: '',
         bookAuthors: '',
-        bookLabel: 'Now Available',
       },
     },
     component: PalizziWelcome,
   },
+
+  // ── History ──
   {
     manifest: {
       type: 'palizzi-history',
@@ -96,20 +119,30 @@ export const customBlocks: CustomBlockDefinition[] = [
       description: 'History section with background image and marquee divider',
       inputs: [
         { name: 'overline', label: 'Overline', type: 'string', defaultValue: 'Since 1918' },
-        { name: 'backgroundImage', label: 'Background Image', type: 'image', defaultValue: '/images/palizziclub-header.jpg' },
-        { name: 'marqueeImage', label: 'Marquee Image', type: 'image', defaultValue: '/images/palizziclub-marquee.png' },
+        { name: 'title', label: 'Title', type: 'string', defaultValue: 'History of' },
+        { name: 'titleAccent', label: 'Title Accent', type: 'string', defaultValue: 'Palizzi' },
+        { name: 'backgroundImage', label: 'Background Image', type: 'image', defaultValue: '' },
+        { name: 'marqueeImage', label: 'Marquee Divider Image', type: 'image', defaultValue: '' },
+        {
+          name: 'paragraphs', label: 'Paragraphs (HTML supported)', type: 'list',
+          listItemSchema: [
+            { name: 'text', label: 'Paragraph Text', type: 'richtext' },
+          ],
+        },
       ],
       defaultProps: {
         overline: 'Since 1918',
         title: 'History of',
         titleAccent: 'Palizzi',
-        backgroundImage: '/images/palizziclub-header.jpg',
-        marqueeImage: '/images/palizziclub-marquee.png',
+        backgroundImage: '',
+        marqueeImage: '',
         paragraphs: [],
       },
     },
     component: PalizziHistory,
   },
+
+  // ── Menu ──
   {
     manifest: {
       type: 'palizzi-menu',
@@ -119,19 +152,45 @@ export const customBlocks: CustomBlockDefinition[] = [
       description: 'Food & Cocktails menu with toggle between categories',
       inputs: [
         { name: 'overline', label: 'Overline', type: 'string', defaultValue: 'Our Offerings' },
-        { name: 'title', label: 'Title (HTML)', type: 'string', defaultValue: 'Food & Cocktails' },
+        { name: 'title', label: 'Title', type: 'string', defaultValue: 'Food & Cocktails' },
         { name: 'subtitle', label: 'Subtitle', type: 'string', defaultValue: '' },
+        { name: 'foodLabel', label: 'Food Tab Label', type: 'string', defaultValue: 'Food' },
+        { name: 'cocktailsLabel', label: 'Cocktails Tab Label', type: 'string', defaultValue: 'Cocktails' },
+        {
+          name: 'foodSections', label: 'Food Sections', type: 'list',
+          listItemSchema: [
+            { name: 'title', label: 'Section Title', type: 'string' },
+            {
+              name: 'items', label: 'Menu Items', type: 'list',
+              listItemSchema: [
+                { name: 'name', label: 'Item Name', type: 'string' },
+                { name: 'desc', label: 'Description', type: 'string' },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'cocktails', label: 'Cocktails', type: 'list',
+          listItemSchema: [
+            { name: 'name', label: 'Cocktail Name', type: 'string' },
+            { name: 'desc', label: 'Description', type: 'string' },
+          ],
+        },
       ],
       defaultProps: {
         overline: 'Our Offerings',
         title: 'Food & Cocktails',
         subtitle: '',
+        foodLabel: 'Food',
+        cocktailsLabel: 'Cocktails',
         foodSections: [],
         cocktails: [],
       },
     },
     component: PalizziMenu,
   },
+
+  // ── House Rules ──
   {
     manifest: {
       type: 'palizzi-rules',
@@ -140,22 +199,40 @@ export const customBlocks: CustomBlockDefinition[] = [
       category: 'Palizzi',
       description: 'House rules section with hours box and numbered rules',
       inputs: [
-        { name: 'hoursTitle', label: 'Hours Title', type: 'string', defaultValue: 'Thursday through Sunday' },
-        { name: 'hoursSubtitle', label: 'Hours Subtitle', type: 'string', defaultValue: '6 p.m. until late night' },
+        { name: 'overline', label: 'Overline', type: 'string', defaultValue: 'Please Observe' },
+        { name: 'title', label: 'Title', type: 'string', defaultValue: 'House' },
+        { name: 'titleAccent', label: 'Title Accent', type: 'string', defaultValue: 'Rules' },
+        { name: 'hoursTitle', label: 'Hours Title', type: 'string', defaultValue: '' },
+        { name: 'hoursSubtitle', label: 'Hours Subtitle', type: 'string', defaultValue: '' },
+        {
+          name: 'badges', label: 'Info Badges', type: 'list',
+          listItemSchema: [
+            { name: 'text', label: 'Badge Text', type: 'string' },
+          ],
+        },
+        {
+          name: 'rules', label: 'House Rules', type: 'list',
+          listItemSchema: [
+            { name: 'text', label: 'Rule Text', type: 'string' },
+          ],
+        },
+        { name: 'disclaimer', label: 'Disclaimer', type: 'string', defaultValue: '' },
       ],
       defaultProps: {
         overline: 'Please Observe',
         title: 'House',
         titleAccent: 'Rules',
-        hoursTitle: 'Thursday through Sunday',
-        hoursSubtitle: '6 p.m. until late night',
-        badges: ['Members Only', 'Cash Only'],
+        hoursTitle: '',
+        hoursSubtitle: '',
+        badges: [],
         rules: [],
         disclaimer: '',
       },
     },
     component: PalizziRules,
   },
+
+  // ── Membership ──
   {
     manifest: {
       type: 'palizzi-membership',
@@ -164,7 +241,19 @@ export const customBlocks: CustomBlockDefinition[] = [
       category: 'Palizzi',
       description: 'Membership information section',
       inputs: [
+        { name: 'overline', label: 'Overline', type: 'string', defaultValue: 'Join Us' },
+        { name: 'title', label: 'Title', type: 'string', defaultValue: 'Become a' },
+        { name: 'titleAccent', label: 'Title Accent', type: 'string', defaultValue: 'Member' },
+        {
+          name: 'paragraphs', label: 'Paragraphs', type: 'list',
+          listItemSchema: [
+            { name: 'text', label: 'Paragraph Text', type: 'string' },
+          ],
+        },
         { name: 'highlight', label: 'Highlight Text', type: 'string', defaultValue: '' },
+        { name: 'closingNote', label: 'Closing Note', type: 'string', defaultValue: '' },
+        { name: 'signature', label: 'Signature', type: 'string', defaultValue: '' },
+        { name: 'footnote', label: 'Footnote', type: 'string', defaultValue: '' },
       ],
       defaultProps: {
         overline: 'Join Us',
@@ -179,6 +268,8 @@ export const customBlocks: CustomBlockDefinition[] = [
     },
     component: PalizziMembership,
   },
+
+  // ── Footer ──
   {
     manifest: {
       type: 'palizzi-footer',
@@ -187,13 +278,27 @@ export const customBlocks: CustomBlockDefinition[] = [
       category: 'Palizzi',
       description: 'Footer with marquee, location, hours, and navigation links',
       inputs: [
-        { name: 'marqueeImage', label: 'Marquee Image', type: 'image', defaultValue: '/images/palizziclub-marquee.png' },
-        { name: 'bottomText', label: 'Bottom Text', type: 'string', defaultValue: 'Palizzi Social Club \u00b7 Est. 1918' },
+        { name: 'marqueeImage', label: 'Marquee Image', type: 'image', defaultValue: '' },
+        {
+          name: 'columns', label: 'Footer Columns', type: 'list',
+          listItemSchema: [
+            { name: 'label', label: 'Column Label', type: 'string' },
+            { name: 'content', label: 'Content (HTML)', type: 'richtext' },
+            {
+              name: 'links', label: 'Links', type: 'list',
+              listItemSchema: [
+                { name: 'label', label: 'Link Label', type: 'string' },
+                { name: 'href', label: 'URL / Anchor', type: 'string' },
+              ],
+            },
+          ],
+        },
+        { name: 'bottomText', label: 'Bottom Text', type: 'string', defaultValue: '' },
       ],
       defaultProps: {
-        marqueeImage: '/images/palizziclub-marquee.png',
+        marqueeImage: '',
         columns: [],
-        bottomText: 'Palizzi Social Club \u00b7 Est. 1918',
+        bottomText: '',
       },
     },
     component: PalizziFooter,

@@ -5,12 +5,16 @@ interface PalizziMembershipProps {
     overline?: string;
     title?: string;
     titleAccent?: string;
-    paragraphs?: string[];
+    paragraphs?: (string | { text: string })[];
     highlight?: string;
     closingNote?: string;
     signature?: string;
     footnote?: string;
   };
+}
+
+function getText(item: string | { text: string }): string {
+  return typeof item === 'string' ? item : item.text;
 }
 
 export function PalizziMembership({ block }: PalizziMembershipProps) {
@@ -26,7 +30,7 @@ export function PalizziMembership({ block }: PalizziMembershipProps) {
 
         <div style={{ border: '1px solid rgba(201,169,110,0.2)', padding: 'clamp(2rem, 4vw, 3rem)', backgroundColor: 'rgba(26,26,26,0.2)' }}>
           {paragraphs.map((p, i) => (
-            <p key={i} style={{ color: 'rgba(245,230,211,0.7)', lineHeight: 1.75, marginBottom: '1.5rem' }}>{p}</p>
+            <p key={i} style={{ color: 'rgba(245,230,211,0.7)', lineHeight: 1.75, marginBottom: '1.5rem' }}>{getText(p)}</p>
           ))}
           <div className="mx-auto" style={{ width: '4rem', height: '1px', backgroundColor: 'rgba(201,169,110,0.3)', margin: '2rem auto' }} />
           {highlight && <p style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1.25rem', color: '#c9a96e', fontStyle: 'italic', marginBottom: '1.5rem' }}>{highlight}</p>}

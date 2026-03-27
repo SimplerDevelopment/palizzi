@@ -13,7 +13,7 @@ interface PalizziNavProps {
 
 export function PalizziNav({ block }: PalizziNavProps) {
   const {
-    logoUrl = '/images/nav-header.png',
+    logoUrl = '',
     brandName = 'Palizzi',
     links = [],
   } = block;
@@ -39,7 +39,7 @@ export function PalizziNav({ block }: PalizziNavProps) {
     >
       <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-3">
-          <Image src={logoUrl} alt={brandName} width={36} height={36} style={{ opacity: 0.8 }} />
+          {logoUrl && <Image src={logoUrl} alt={brandName} width={36} height={36} style={{ opacity: 0.8 }} />}
           <span style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1.25rem', letterSpacing: '0.1em', color: '#c9a96e', textTransform: 'uppercase' }}>
             {brandName}
           </span>

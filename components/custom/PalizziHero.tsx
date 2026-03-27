@@ -16,8 +16,8 @@ interface PalizziHeroProps {
 export function PalizziHero({ block }: PalizziHeroProps) {
   const {
     address = '1408 South 12th Street \u00b7 Philadelphia',
-    crestUrl = '/images/nav-header.png',
-    neonUrl = '/images/neon-red.png',
+    crestUrl = '',
+    neonUrl = '',
     tagline = "if the neon is on, we\u2019re open",
     established = 'Est. 1918',
     scrollTarget = '#welcome',
@@ -30,10 +30,12 @@ export function PalizziHero({ block }: PalizziHeroProps) {
 
       <div className="relative z-10 flex flex-col items-center gap-8">
         <p style={{ fontSize: '0.75rem', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(245,230,211,0.4)' }}>{address}</p>
-        <Image src={crestUrl} alt="Club crest" width={120} height={120} style={{ opacity: 0.6 }} priority />
-        <div className="relative">
-          <Image src={neonUrl} alt="Neon sign" width={443} height={143} className="h-auto neon-text" style={{ width: 'clamp(280px, 50vw, 443px)' }} priority />
-        </div>
+        {crestUrl && <Image src={crestUrl} alt="Club crest" width={120} height={120} style={{ opacity: 0.6 }} priority />}
+        {neonUrl && (
+          <div className="relative">
+            <Image src={neonUrl} alt="Neon sign" width={443} height={143} className="h-auto neon-text" style={{ width: 'clamp(280px, 50vw, 443px)' }} priority />
+          </div>
+        )}
         <div style={{ width: '6rem', height: '1px', background: 'linear-gradient(to right, transparent, #c9a96e, transparent)' }} />
         <p style={{ fontSize: 'clamp(0.875rem, 2vw, 1rem)', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(245,230,211,0.6)' }}>{tagline}</p>
         <p style={{ fontSize: '0.75rem', letterSpacing: '0.5em', textTransform: 'uppercase', color: 'rgba(201,169,110,0.6)', marginTop: '1rem' }}>{established}</p>

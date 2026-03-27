@@ -15,14 +15,16 @@ interface PalizziFooterProps {
 }
 
 export function PalizziFooter({ block }: PalizziFooterProps) {
-  const { marqueeImage = '/images/palizziclub-marquee.png', columns = [], bottomText = '' } = block;
+  const { marqueeImage = '', columns = [], bottomText = '' } = block;
 
   return (
     <footer style={{ borderTop: '1px solid rgba(201,169,110,0.1)', padding: '4rem 1.5rem', backgroundColor: '#0d0d0d' }}>
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-center mb-12">
-          <Image src={marqueeImage} alt="" width={300} height={53} className="h-auto" style={{ opacity: 0.3, width: 'clamp(200px, 30vw, 300px)' }} />
-        </div>
+        {marqueeImage && (
+          <div className="flex justify-center mb-12">
+            <Image src={marqueeImage} alt="" width={300} height={53} className="h-auto" style={{ opacity: 0.3, width: 'clamp(200px, 30vw, 300px)' }} />
+          </div>
+        )}
 
         <div className="grid gap-12 text-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))' }}>
           {columns.map((col, i) => (

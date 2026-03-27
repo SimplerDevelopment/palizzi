@@ -7,7 +7,7 @@ interface PalizziWelcomeProps {
     overline?: string;
     title?: string;
     titleAccent?: string;
-    paragraphs?: string[];
+    paragraphs?: (string | { text: string })[];
     bookImage?: string;
     bookTitle?: string;
     bookSubtitle?: string;
@@ -16,13 +16,17 @@ interface PalizziWelcomeProps {
   };
 }
 
+function getText(item: string | { text: string }): string {
+  return typeof item === 'string' ? item : item.text;
+}
+
 export function PalizziWelcome({ block }: PalizziWelcomeProps) {
   const {
     overline = 'Benvenuti',
     title = 'Welcome to',
     titleAccent = 'Palizzi Social Club',
     paragraphs = [],
-    bookImage = '/images/dinner-at-the-club.jpg',
+    bookImage = '',
     bookTitle = 'Dinner at the Club',
     bookSubtitle = '',
     bookAuthors = '',
@@ -43,7 +47,7 @@ export function PalizziWelcome({ block }: PalizziWelcomeProps) {
         </h2>
 
         {paragraphs.map((p, i) => (
-          <p key={i} style={{ color: 'rgba(245,230,211,0.7)', lineHeight: 1.75, maxWidth: '36rem', fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>{p}</p>
+          <p key={i} style={{ color: 'rgba(245,230,211,0.7)', lineHeight: 1.75, maxWidth: '36rem', fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}>{getText(p)}</p>
         ))}
 
         {bookImage && (

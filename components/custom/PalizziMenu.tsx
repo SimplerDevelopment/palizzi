@@ -9,14 +9,29 @@ interface PalizziMenuProps {
     overline?: string;
     title?: string;
     subtitle?: string;
+    foodLabel?: string;
+    cocktailsLabel?: string;
     foodSections?: Array<{ title: string; items: Array<{ name: string; desc: string }> }>;
     cocktails?: Array<{ name: string; desc: string }>;
   };
 }
 
 export function PalizziMenu({ block }: PalizziMenuProps) {
-  const { overline = 'Our Offerings', title = 'Food & Cocktails', subtitle = '', foodSections = [], cocktails = [] } = block;
+  const {
+    overline = 'Our Offerings',
+    title = 'Food & Cocktails',
+    subtitle = '',
+    foodLabel = 'Food',
+    cocktailsLabel = 'Cocktails',
+    foodSections = [],
+    cocktails = [],
+  } = block;
   const [active, setActive] = useState<MenuCategory>('food');
+
+  const tabs: { key: MenuCategory; label: string }[] = [
+    { key: 'food', label: foodLabel },
+    { key: 'cocktails', label: cocktailsLabel },
+  ];
 
   return (
     <section id="menu" className="relative" style={{ padding: 'clamp(4rem, 8vw, 8rem) 1.5rem', backgroundColor: '#0d0d0d' }}>
@@ -28,13 +43,13 @@ export function PalizziMenu({ block }: PalizziMenuProps) {
         </div>
 
         <div className="flex justify-center gap-1 mb-16">
-          {(['food', 'cocktails'] as MenuCategory[]).map((cat) => (
-            <button key={cat} onClick={() => setActive(cat)} style={{
+          {tabs.map((tab) => (
+            <button key={tab.key} onClick={() => setActive(tab.key)} style={{
               padding: '0.75rem 2rem', fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase', transition: 'all 0.3s', cursor: 'pointer',
-              border: active === cat ? '1px solid #722f37' : '1px solid rgba(201,169,110,0.3)',
-              backgroundColor: active === cat ? '#722f37' : 'transparent',
-              color: active === cat ? '#f5e6d3' : 'rgba(245,230,211,0.5)',
-            }}>{cat}</button>
+              border: active === tab.key ? '1px solid #722f37' : '1px solid rgba(201,169,110,0.3)',
+              backgroundColor: active === tab.key ? '#722f37' : 'transparent',
+              color: active === tab.key ? '#f5e6d3' : 'rgba(245,230,211,0.5)',
+            }}>{tab.label}</button>
           ))}
         </div>
 
