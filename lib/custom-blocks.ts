@@ -59,11 +59,11 @@ export const customBlocks: CustomBlockDefinition[] = [
         { name: 'scrollTarget', label: 'Scroll Target Anchor', type: 'string', defaultValue: '#welcome' },
       ],
       defaultProps: {
-        address: '',
+        address: '1408 South 12th Street \u00b7 Philadelphia',
         crestUrl: '',
         neonUrl: '',
-        tagline: '',
-        established: '',
+        tagline: "if the neon is on, we\u2019re open",
+        established: 'Est. 1918',
         scrollTarget: '#welcome',
       },
     },
@@ -85,7 +85,7 @@ export const customBlocks: CustomBlockDefinition[] = [
         {
           name: 'paragraphs', label: 'Paragraphs', type: 'list',
           listItemSchema: [
-            { name: 'text', label: 'Paragraph Text', type: 'string' },
+            { name: 'text', label: 'Paragraph Text', type: 'richtext' },
           ],
         },
         { name: 'bookImage', label: 'Book Cover Image', type: 'image', defaultValue: '' },
@@ -101,7 +101,7 @@ export const customBlocks: CustomBlockDefinition[] = [
         paragraphs: [],
         bookImage: '',
         bookLabel: 'Now Available',
-        bookTitle: '',
+        bookTitle: 'Dinner at the Club',
         bookSubtitle: '',
         bookAuthors: '',
       },
@@ -164,7 +164,7 @@ export const customBlocks: CustomBlockDefinition[] = [
               name: 'items', label: 'Menu Items', type: 'list',
               listItemSchema: [
                 { name: 'name', label: 'Item Name', type: 'string' },
-                { name: 'desc', label: 'Description', type: 'string' },
+                { name: 'desc', label: 'Description', type: 'richtext' },
               ],
             },
           ],
@@ -173,7 +173,7 @@ export const customBlocks: CustomBlockDefinition[] = [
           name: 'cocktails', label: 'Cocktails', type: 'list',
           listItemSchema: [
             { name: 'name', label: 'Cocktail Name', type: 'string' },
-            { name: 'desc', label: 'Description', type: 'string' },
+            { name: 'desc', label: 'Description', type: 'richtext' },
           ],
         },
       ],
@@ -213,10 +213,10 @@ export const customBlocks: CustomBlockDefinition[] = [
         {
           name: 'rules', label: 'House Rules', type: 'list',
           listItemSchema: [
-            { name: 'text', label: 'Rule Text', type: 'string' },
+            { name: 'text', label: 'Rule Text', type: 'richtext' },
           ],
         },
-        { name: 'disclaimer', label: 'Disclaimer', type: 'string', defaultValue: '' },
+        { name: 'disclaimer', label: 'Disclaimer', type: 'richtext', defaultValue: '' },
       ],
       defaultProps: {
         overline: 'Please Observe',
@@ -247,13 +247,13 @@ export const customBlocks: CustomBlockDefinition[] = [
         {
           name: 'paragraphs', label: 'Paragraphs', type: 'list',
           listItemSchema: [
-            { name: 'text', label: 'Paragraph Text', type: 'string' },
+            { name: 'text', label: 'Paragraph Text', type: 'richtext' },
           ],
         },
-        { name: 'highlight', label: 'Highlight Text', type: 'string', defaultValue: '' },
-        { name: 'closingNote', label: 'Closing Note', type: 'string', defaultValue: '' },
+        { name: 'highlight', label: 'Highlight Text', type: 'richtext', defaultValue: '' },
+        { name: 'closingNote', label: 'Closing Note', type: 'richtext', defaultValue: '' },
         { name: 'signature', label: 'Signature', type: 'string', defaultValue: '' },
-        { name: 'footnote', label: 'Footnote', type: 'string', defaultValue: '' },
+        { name: 'footnote', label: 'Footnote', type: 'richtext', defaultValue: '' },
       ],
       defaultProps: {
         overline: 'Join Us',
