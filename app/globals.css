@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Neon glow effect */
+@keyframes neon-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 7px #ff3b3b) drop-shadow(0 0 10px #ff3b3b) drop-shadow(0 0 21px #ff3b3b) drop-shadow(0 0 42px #ff1a1a);
+    opacity: 1;
+  }
+  50% {
+    filter: drop-shadow(0 0 4px #ff3b3b) drop-shadow(0 0 7px #ff3b3b) drop-shadow(0 0 15px #ff3b3b);
+    opacity: 0.95;
+  }
+}
+
+.neon-text {
+  animation: neon-pulse 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #722f37;
+  border-radius: 4px;
+}
